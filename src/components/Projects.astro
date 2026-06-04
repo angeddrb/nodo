@@ -1,0 +1,46 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { projects } from "../data/projects";
+
+// Logos como SVG crudo (blancos, van centrados sobre la foto).
+import carpintero from "../assets/logos/carpintero.svg?raw";
+import leCotonnier from "../assets/logos/le-cotonnier.svg?raw";
+import ozCranberry from "../assets/logos/oz-cranberry-lab.svg?raw";
+import urco from "../assets/logos/urco.svg?raw";
+import bancoDeRopa from "../assets/logos/banco-de-ropa.svg?raw";
+import boilera from "../assets/logos/boilera.svg?raw";
+
+const logos: Record<string, string> = {
+  carpintero: carpintero,
+  "le-cotonnier": leCotonnier,
+  "oz-cranberry-lab": ozCranberry,
+  urco: urco,
+  "banco-de-ropa": bancoDeRopa,
+  boilera: boilera,
+};
+---
+
+<section class="section" id="proyectos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Proyectos</span>
+    </div>
+
+    <div class="grid">
+      <article class="card-intro reveal" data-d="1">
+        <h3>Proyectos seleccionados</h3>
+        <div class="chips">
+          <span class="chip">Shopify</span>
+          <span class="chip">Webflow</span>
+          <span class="chip">Código + IA</span>
+        </div>
+      </article>
+
+      {
+        projects.map((p, i) => (
+          <ProjectCard project={p} logo={logos[p.slug]} delay={i + 2} />
+        ))
+      }
+    </div>
+  </div>
+</section>

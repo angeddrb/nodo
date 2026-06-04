@@ -1,0 +1,43 @@
+---
+// Tipografías self-hosted (Fontsource) → sin requests externos, ideal para Cloudflare.
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/dm-mono/400.css';
+import '@fontsource/dm-mono/500.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Nodo · by Ange Díaz del Río',
+  description =
+    'Diseño, orden y construcción digital. Sitios web que funcionan. Shopify, Webflow, Diseño UI, Desarrollo e IA por Ange Díaz del Río, Santiago de Chile.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div id="bgfx" aria-hidden="true"></div>
+    <slot />
+
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

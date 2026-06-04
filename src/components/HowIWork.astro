@@ -1,0 +1,28 @@
+---
+const steps = [
+  { n: '01', title: 'Orden', desc: 'Objetivo, contenido, navegación y prioridades' },
+  { n: '02', title: 'Diseño', desc: 'Propuesta visual clara y responsive' },
+  { n: '03', title: 'Implementación', desc: 'Shopify, Webflow o código + IA' },
+  { n: '04', title: 'Entrega', desc: 'QA, publicación y capacitación' },
+];
+---
+<section class="section work" id="como-trabajo">
+  <div class="wrap">
+    <span class="eyebrow reveal">Como trabajo</span>
+    <h2 class="reveal" data-d="1">Simple, pero no improvisado.</h2>
+    <p class="lead reveal" data-d="2">
+      La web puede partir con plantillas de Shopify, Webflow o una base generada con IA.
+      Lo importante es lo que viene después: criterio, ajustes y detalle.
+    </p>
+
+    <div class="steps">
+      {steps.map((s, i) => (
+        <article class="step reveal" data-d={i + 1}>
+          <div class="num">{s.n}</div>
+          <h4>{s.title}</h4>
+          <p class="desc">{s.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

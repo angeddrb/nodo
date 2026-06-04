@@ -1,0 +1,27 @@
+---
+const tags = ['Shopify', 'Webflow', 'Diseño UI', 'Desarrollo', 'IA'];
+// Palabras que rotan en el titular (separadas por "|"). Agrega las que quieras.
+const rotating = ['funcionan.', 'venden.', 'impresionan.'];
+---
+<section class="hero" id="que-hago">
+  <div class="blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <div class="wrap">
+    <span class="eyebrow load" data-d="1">Que hago</span>
+
+    <h1 class="load" data-d="2">
+      Diseño, orden y construcción digital. Sitios web que
+      <span class="mark swap" data-words={rotating.join('|')}>
+        <span class="swap-word">{rotating[0]}</span>
+      </span>
+    </h1>
+
+    <div class="tags load" data-d="3">
+      {tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+  </div>
+</section>
