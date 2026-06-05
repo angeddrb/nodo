@@ -35,7 +35,7 @@ export const projects: Project[] = [
   { slug: 'le-cotonnier',     title: 'Le Cotonnier',     subtitle: 'Migración • Estructura • Rediseño', type: 'shopify',   href: 'https://lecotonnier.cl/', image: '/projects/bg-le-cotonnier.png' },
   { slug: 'carpintero',       title: 'Carpintero',       subtitle: 'Implementación diseño personalizado', type: 'shopify',   href: 'https://www.grupocarpintero.com/', image: '/projects/bg-carpintero.png' },
   { slug: 'oz-cranberry-lab', title: 'Oz Cranberry Lab', subtitle: 'Rediseño • Estructura • Orden', type: 'shopify',   href: 'https://ozcranberry.com/', image: '/projects/bg-oz-cranberry-lab.png' },
-  { slug: 'banco-de-ropa',    title: 'Banco de Ropa',    subtitle: 'Diseño • Estructura • Contenido', type: 'webflow',   href: 'https://www.bancoderopa.cl/', image: '/projects/bg-banco-de-ropa.png' },
+  { slug: 'banco-de-ropa',    title: 'Banco de Ropa',    subtitle: 'Diseño • Estructura • Contenido', type: 'webflow',   href: '#', image: '/projects/bg-banco-de-ropa.png' },
   { slug: 'boilera',          title: 'Boilera',          subtitle: 'Diseño • Personalización producto', type: 'shopify',   href: 'https://boilera.cl/', image: '/projects/bg-boilera.png' },
   { slug: 'urco',             title: 'Urco',             subtitle: 'Diseño • Estructura', type: 'shopify',   href: 'https://www.urco.cl/', image: '/projects/bg-urco.png' },
   { slug: 'lucrecia-franzoy', title: 'Lucrecia Franzoy', subtitle: 'Diseño • Estructura', type: 'shopify',   href: 'https://lucreciafranzoy.cl/', image: '/projects/bg-lucrecia-franzoy.png' },
