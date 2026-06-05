@@ -20,11 +20,17 @@ export function initLenis(): Lenis | null {
   }
   requestAnimationFrame(raf);
 
-  // Enlaces ancla → scroll suave con Lenis (respeta el header sticky de 76px)
-  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+  // Enlaces ancla → scroll suave con Lenis (respeta el header de 76px).
+  // Soporta "#id" y "/#id" (este último navega entre páginas si hace falta).
+  document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if (!id || id === '#') return;
+      const href = a.getAttribute('href') || '';
+      const i = href.indexOf('#');
+      if (i < 0) return;
+      const id = href.slice(i); // "#que-hago"
+      const path = href.slice(0, i); // "" | "/" | "/otra"
+      const samePage = path === '' || path === location.pathname || (path === '/' && location.pathname === '/');
+      if (!samePage) return; // dejar que el navegador cambie de página
       const el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();

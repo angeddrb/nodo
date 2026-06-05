@@ -4,12 +4,18 @@ import { WHATSAPP } from '../data/site';
 ---
 <header class="site" id="top">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Nodo — inicio"><NodoLogo /></a>
+    <a
+      class="brand [&_svg]:block [&_svg]:h-10 [&_svg]:w-auto"
+      href="/"
+      aria-label="Nodo — inicio"
+    >
+      <NodoLogo />
+    </a>
 
     <nav class="nav-links" aria-label="Principal">
-      <a class="navlink" href="#que-hago">Que hago</a>
-      <a class="navlink" href="#proyectos">Proyectos</a>
-      <a class="navlink" href="#como-trabajo">Como trabajo</a>
+      <a class="navlink" href="/#que-hago">Que hago</a>
+      <a class="navlink" href="/#proyectos">Proyectos</a>
+      <a class="navlink" href="/#como-trabajo">Como trabajo</a>
       <a class="btn" href={WHATSAPP} target="_blank" rel="noopener">
         Escríbeme por Whatsapp <span class="arr">→</span>
       </a>

@@ -2,7 +2,8 @@
 
 /* ============================================================
    NODO — DESIGN TOKENS (Tailwind v4 @theme)
-   Disponibles como utilidades: bg-lime-300, text-dark, font-display, font-mono…
+   Disponibles como utilidades: bg-lime-300, text-dark, font-display,
+   font-mono, rounded-card…
    ============================================================ */
 @theme {
   --color-dark:      #0B2234;
@@ -15,21 +16,16 @@
 
   --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    "DM Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --radius-card: 18px; /* → rounded-card */
 }
 
-/* non-theme custom props used by the animated bits */
-:root {
-  --maxw: 1240px;
-  --pad: clamp(20px, 5vw, 64px);
-  --radius: 18px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
+:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
 
 /* ============================================================
-   LENIS (smooth scroll) — recommended base styles
+   LENIS (smooth scroll)
    ============================================================ */
-html.lenis,
-html.lenis body { height: auto; }
+html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: clip; }
@@ -39,9 +35,7 @@ html.lenis body { height: auto; }
    BASE
    ============================================================ */
 * , *::before, *::after { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
 body {
   font-family: var(--font-display);
   background: transparent;
@@ -52,64 +46,45 @@ body {
   overflow-x: hidden;
   margin: 0;
 }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
 
-/* full-viewport color layer — interpolates white <-> lime on scroll */
+/* capa de color de fondo (morph blanco <-> lima por scroll) */
 #bgfx {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
+  position: fixed; inset: 0; z-index: -2;
   background: var(--page-bg, var(--color-white));
   pointer-events: none;
 }
 
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
+/* contenedor central reutilizable */
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 64px); }
 
-.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
-
-/* small monospace section label "— SECCIÓN" */
+/* etiqueta mono "— SECCIÓN" (componente reutilizable con su línea) */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55em;
+  display: inline-flex; align-items: center; gap: 0.55em;
 }
-.eyebrow::before {
-  content: "";
-  width: 1.4em; height: 2px;
-  background: currentColor;
-  display: inline-block;
-  opacity: 0.7;
-}
+.eyebrow::before { content: ""; width: 1.4em; height: 2px; background: currentColor; display: inline-block; opacity: 0.7; }
 
-/* lime text-highlight (marker behind a word) */
+/* ============================================================
+   EFECTO: highlight lima + palabra rotativa
+   ============================================================ */
 .mark { position: relative; white-space: nowrap; }
 .mark > span { position: relative; z-index: 1; }
 .mark::before {
-  content: "";
-  position: absolute;
-  inset: 0.15em -0.1em 0.15em -0.1em;
-  background: var(--color-lime-300);
-  border-radius: 8px;
-  z-index: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
+  content: ""; position: absolute; inset: 0.06em -0.18em 0.08em -0.18em;
+  background: var(--color-lime-300); border-radius: 8px; z-index: 0;
+  transform: scaleX(0); transform-origin: left center;
   animation: markIn 0.7s 0.5s var(--ease) forwards;
 }
 @keyframes markIn { to { transform: scaleX(1); } }
-
-/* rotating word slot */
 .swap {
-  display: inline-block;
-  box-sizing: content-box;
-  vertical-align: baseline;
-  overflow: hidden;
-  padding: 0 0.18em;
-  transition: width 0.5s var(--ease);
+  display: inline-block; box-sizing: content-box; vertical-align: baseline;
+  overflow: hidden; padding: 0 0.18em; transition: width 0.5s var(--ease);
 }
 .swap::before { inset: 0.06em 0 0.08em 0; }
 .swap > .swap-word { display: inline-block; will-change: transform, opacity; }
@@ -118,105 +93,56 @@ img { display: block; max-width: 100%; }
    HEADER / NAV
    ============================================================ */
 header.site {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.35s ease;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  border-bottom: 1px solid transparent; transition: border-color 0.35s ease;
 }
-/* background layer = current page color (white <-> lima via --page-bg).
-   Transparente arriba del todo para no cortar el degradado del hero;
-   aparece con un fade al hacer scroll. */
 header.site::before {
-  content: "";
-  position: absolute; inset: 0;
-  z-index: -1;
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: var(--page-bg, var(--color-white));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  opacity: 0;
-  transition: opacity 0.35s ease;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; transition: opacity 0.35s ease;
 }
 header.site.scrolled::before { opacity: 1; }
 header.site.scrolled { border-bottom-color: color-mix(in srgb, var(--color-dark) 8%, transparent); }
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 76px;
-}
-.brand svg { height: 60px; width: auto; display: block; }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
+.nav-links { display: flex; align-items: center; gap: 30px; font-family: var(--font-mono); font-size: 0.82rem; }
 .nav-links a.navlink { position: relative; padding: 4px 0; color: var(--color-dark); opacity: 0.85; transition: opacity 0.2s; }
 .nav-links a.navlink::after {
-  content: ""; position: absolute; left: 0; bottom: -2px;
-  width: 100%; height: 2px; background: var(--color-lime-500);
-  transform: scaleX(0); transform-origin: right; transition: transform 0.3s var(--ease);
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px;
+  background: var(--color-lime-500); transform: scaleX(0); transform-origin: right; transition: transform 0.3s var(--ease);
 }
 .nav-links a.navlink:hover { opacity: 1; }
 .nav-links a.navlink:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* pill button — relleno que sube desde abajo + flecha que desliza */
+/* pill button — relleno que sube + flecha que desliza (EFECTO) */
 .btn {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--color-dark);
-  border: 1px solid var(--color-dark);
-  border-radius: 999px;
-  padding: 11px 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-  cursor: pointer;
-  white-space: nowrap;
+  font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500;
+  color: var(--color-dark); border: 1px solid var(--color-dark); border-radius: 999px;
+  padding: 11px 20px; display: inline-flex; align-items: center; gap: 0.6em; cursor: pointer; white-space: nowrap;
   background-color: var(--color-lime-300);
   background-image: linear-gradient(var(--color-dark), var(--color-dark));
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: 100% 0%;
-  transition: background-size 0.42s var(--ease), background-color 0.3s ease,
-    border-color 0.3s ease, color 0.28s ease, transform 0.3s var(--ease),
-    box-shadow 0.35s var(--ease);
+  background-repeat: no-repeat; background-position: center bottom; background-size: 100% 0%;
+  transition: background-size 0.42s var(--ease), background-color 0.3s ease, border-color 0.3s ease,
+    color 0.28s ease, transform 0.3s var(--ease), box-shadow 0.35s var(--ease);
 }
 .btn .arr { transition: transform 0.3s var(--ease); }
-.btn:hover {
-  background-size: 100% 100%;
-  color: var(--color-white);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px -10px color-mix(in srgb, var(--color-dark) 55%, transparent);
-}
+.btn:hover { background-size: 100% 100%; color: var(--color-white); transform: translateY(-2px); box-shadow: 0 10px 26px -10px color-mix(in srgb, var(--color-dark) 55%, transparent); }
 .btn:hover .arr { transform: translate(3px, -3px); }
-.btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--color-dark) 55%, transparent);
-}
-
-/* en la fase lima el header invierte su botón (oscuro) para que no se pierda */
+.btn:active { transform: translateY(0); box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--color-dark) 55%, transparent); }
 html.is-lime header.site .btn {
   background-color: var(--color-dark);
   background-image: linear-gradient(var(--color-lime-300), var(--color-lime-300));
   color: var(--color-white);
 }
 html.is-lime header.site .btn:hover { color: var(--color-dark); }
-
 .nav-toggle { display: none; }
 
 /* ============================================================
-   HERO
+   HERO (contenedor + blobs que respiran)
+   padding-top deja espacio al header fixed
    ============================================================ */
 .hero { position: relative; padding-top: clamp(104px, 11vw, 150px); padding-bottom: clamp(60px, 9vw, 120px); overflow: hidden; }
-
-/* faint lime blobs that drift + "breathe" */
 .blobs { position: absolute; inset: 0; z-index: -1; pointer-events: none; filter: blur(64px); opacity: 0.6; }
 .blob { position: absolute; border-radius: 50%; will-change: transform, opacity; }
 .blob.b1 { width: 480px; height: 480px; background: var(--color-lime-200); top: -130px; right: -70px; animation: drift1 16s ease-in-out infinite; }
@@ -226,65 +152,35 @@ html.is-lime header.site .btn:hover { color: var(--color-dark); }
 @keyframes drift2 { 0%,100%{ transform: translate(0,0) scale(0.96); opacity:0.4;} 50%{ transform: translate(54px,-30px) scale(1.1); opacity:0.6;} }
 @keyframes drift3 { 0%,100%{ transform: translate(0,0) scale(1); opacity:0.22;} 50%{ transform: translate(30px,36px) scale(1.2); opacity:0.4;} }
 
-.hero h1 {
-  font-size: clamp(2.6rem, 7.6vw, 5.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  font-weight: 400;
-  max-width: 14ch;
-  margin: 26px 0 0;
-}
-
-.tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+/* ============================================================
+   PILLS reutilizables
+   ============================================================ */
 .tag {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  background: var(--color-lime-200);
-  color: var(--color-dark);
-  border-radius: 999px;
-  padding: 7px 15px;
-  border: 1px solid color-mix(in srgb, var(--color-lime-500) 45%, var(--color-lime-200));
+  font-family: var(--font-mono); font-size: 0.74rem; background: var(--color-lime-200); color: var(--color-dark);
+  border-radius: 999px; padding: 7px 15px; border: 1px solid color-mix(in srgb, var(--color-lime-500) 45%, var(--color-lime-200));
 }
+.chip {
+  font-family: var(--font-mono); font-size: 0.7rem; background: var(--color-white);
+  border: 1px solid color-mix(in srgb, var(--color-dark) 12%, transparent); border-radius: 999px; padding: 6px 13px;
+}
+a.chip { transition: background 0.2s var(--ease), color 0.2s, border-color 0.2s, transform 0.2s var(--ease); }
+a.chip:hover { background: var(--color-dark); color: var(--color-white); border-color: var(--color-dark); transform: translateY(-1px); }
+
+/* botones de filtro (/proyectos) */
+.filter-btn {
+  font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-dark) 18%, transparent); background: transparent; color: var(--color-dark);
+  cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+}
+.filter-btn:hover { border-color: var(--color-dark); transform: translateY(-1px); }
+.filter-btn.is-active { background: var(--color-lime-300); border-color: var(--color-dark); }
 
 /* ============================================================
-   PROYECTOS
+   CARD DE PROYECTO (foto + logo + overlay) — EFECTO, reutilizable
    ============================================================ */
-.section { padding-block: clamp(48px, 7vw, 96px); }
-.section-head { margin-bottom: 30px; }
-
-.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-
-/* intro card (lime) */
-.card-intro {
-  background: var(--color-lime-300);
-  border-radius: var(--radius);
-  padding: 26px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  aspect-ratio: 4 / 5;
-}
-.card-intro h3 { font-size: 1.7rem; line-height: 1.05; letter-spacing: -0.01em; font-weight: 500; margin: 0; }
-.card-intro .chips { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
-.chip {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-dark) 12%, transparent);
-  border-radius: 999px;
-  padding: 6px 13px;
-}
-
-/* project image card */
 .project {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: var(--color-dark);
-  isolation: isolate;
-  cursor: pointer;
-  display: block;
+  position: relative; border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 4 / 5;
+  background: var(--color-dark); isolation: isolate; cursor: pointer; display: block;
 }
 .project::before {
   content: ""; position: absolute; inset: 0; z-index: 0;
@@ -292,118 +188,40 @@ html.is-lime header.site .btn:hover { color: var(--color-dark); }
   transition: transform 0.6s var(--ease);
 }
 .project:hover::before { transform: scale(1.06); }
-.project::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(11,34,52,0) 35%, rgba(11,34,52,0.85) 100%);
-  z-index: 1;
-}
+.project::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,34,52,0) 35%, rgba(11,34,52,0.85) 100%); z-index: 1; }
 .project > * { position: relative; z-index: 2; }
-
-.badge {
-  position: absolute; top: 12px; left: 12px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  background: var(--color-lime-300);
-  color: var(--color-dark);
-  border-radius: 999px;
-  padding: 5px 11px;
-}
+.badge { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 0.66rem; background: var(--color-lime-300); color: var(--color-dark); border-radius: 999px; padding: 5px 11px; }
 .watermark { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 18px; }
 .watermark svg { width: 62%; max-width: 150px; height: auto; opacity: 0.97; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35)); }
-
 .project .meta { position: absolute; left: 14px; bottom: 14px; right: 56px; }
 .project .meta .ttl { color: #fff; font-weight: 600; font-size: 1rem; line-height: 1.1; }
 .project .meta .sub { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.72); margin-top: 3px; }
-
-.go {
-  position: absolute; right: 12px; bottom: 12px;
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: var(--color-white);
-  color: var(--color-dark);
-  display: grid; place-items: center;
-  transition: transform 0.3s var(--ease), background 0.3s;
-}
+.go { position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--color-white); color: var(--color-dark); display: grid; place-items: center; transition: transform 0.3s var(--ease), background 0.3s; }
 .project:hover .go { background: var(--color-lime-300); transform: rotate(45deg); }
 .go svg { width: 16px; height: 16px; }
 
-/* ============================================================
-   COMO TRABAJO  (color provided by the scroll morph layer)
-   ============================================================ */
-.work { background: transparent; }
+/* card "Ver más" (último slot, oscura) */
+.card-more {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between;
+  aspect-ratio: 4 / 5; border-radius: var(--radius-card); background: var(--color-dark); color: #fff;
+  padding: 26px 24px; transition: background 0.35s var(--ease);
+}
+.card-more .more-title { font-size: 1.7rem; font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; color: var(--color-lime-300); max-width: 9ch; }
+.card-more:hover { background: color-mix(in srgb, var(--color-dark) 88%, var(--color-lime-500)); }
+.card-more:hover .go { background: var(--color-lime-300); transform: rotate(45deg); }
+
+/* eyebrow oscuro sobre el fondo lima */
 .work .eyebrow { color: var(--color-dark); }
-.work h2 {
-  font-size: clamp(2rem, 5.2vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.04;
-  margin: 16px 0 0;
-}
-.work p.lead {
-  max-width: 56ch;
-  margin-top: 18px;
-  font-size: 1.02rem;
-  color: color-mix(in srgb, var(--color-dark) 82%, transparent);
-}
-.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
-.step {
-  background: var(--color-lime-200);
-  border: 1px solid color-mix(in srgb, var(--color-lime-500) 40%, transparent);
-  border-radius: var(--radius);
-  padding: 22px 20px 26px;
-}
-.step .num { font-size: 2.3rem; font-weight: 700; line-height: 1; color: var(--color-lime-500); letter-spacing: -0.02em; }
-.step h4 { font-size: 1.2rem; font-weight: 600; margin: 14px 0 0; }
-.step .desc { font-family: var(--font-mono); font-size: 0.74rem; color: var(--color-ink-soft); margin-top: 8px; line-height: 1.45; }
 
 /* ============================================================
-   CONTACTO
-   ============================================================ */
-.contact h2 {
-  font-size: clamp(2.4rem, 6.5vw, 4.6rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.04;
-  max-width: 13ch;
-  margin: 16px 0 0;
-}
-.contact .ask {
-  font-size: clamp(2.4rem, 6.5vw, 4.6rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.04;
-  color: var(--color-lime-500);
-  margin-top: 4px;
-}
-.contact .btn { margin-top: 34px; }
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer.site {
-  background: var(--color-dark);
-  color: rgba(255,255,255,0.78);
-  padding-block: 26px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-}
-footer.site .wrap { display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: center; justify-content: center; text-align: center; }
-footer.site .name { color: var(--color-lime-300); }
-
-/* ============================================================
-   SCROLL REVEAL + LOAD
+   SCROLL REVEAL + LOAD (EFECTO)
    ============================================================ */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
-.reveal[data-d="1"] { transition-delay: 0.06s; }
-.reveal[data-d="2"] { transition-delay: 0.12s; }
-.reveal[data-d="3"] { transition-delay: 0.18s; }
-.reveal[data-d="4"] { transition-delay: 0.24s; }
-.reveal[data-d="5"] { transition-delay: 0.30s; }
-
+.reveal[data-d="1"]{transition-delay:.06s} .reveal[data-d="2"]{transition-delay:.12s} .reveal[data-d="3"]{transition-delay:.18s}
+.reveal[data-d="4"]{transition-delay:.24s} .reveal[data-d="5"]{transition-delay:.30s}
 .load { opacity: 0; transform: translateY(18px); animation: loadIn 0.8s var(--ease) forwards; }
-.load[data-d="1"]{ animation-delay:0.05s } .load[data-d="2"]{ animation-delay:0.15s }
-.load[data-d="3"]{ animation-delay:0.25s } .load[data-d="4"]{ animation-delay:0.35s }
+.load[data-d="1"]{animation-delay:.05s} .load[data-d="2"]{animation-delay:.15s} .load[data-d="3"]{animation-delay:.25s} .load[data-d="4"]{animation-delay:.35s}
 @keyframes loadIn { to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -414,19 +232,21 @@ footer.site .name { color: var(--color-lime-300); }
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE (solo de los componentes-clase)
    ============================================================ */
-@media (max-width: 1080px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .steps { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 760px) {
   .nav-links { display: none; }
   .nav-toggle { display: inline-flex; }
-  .grid { grid-template-columns: repeat(2, 1fr); }
 }
+/* compactar cards en pantallas chicas (2 columnas) */
 @media (max-width: 480px) {
-  .grid { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .hero h1 { max-width: none; }
+  .watermark svg { width: 54%; max-width: 100px; }
+  .project .meta { left: 10px; bottom: 10px; right: 40px; }
+  .project .meta .ttl { font-size: 0.85rem; }
+  .project .meta .sub { font-size: 0.6rem; }
+  .badge { font-size: 0.6rem; padding: 4px 9px; }
+  .go { width: 28px; height: 28px; right: 9px; bottom: 9px; }
+  .chip { font-size: 0.62rem; padding: 5px 10px; }
+  .card-more { padding: 18px 16px; }
+  .card-more .more-title { font-size: 1.2rem; }
 }
