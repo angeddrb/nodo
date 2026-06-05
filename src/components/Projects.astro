@@ -1,10 +1,11 @@
 ---
-import ProjectCard from './ProjectCard.astro';
-import { projects, PROJECT_TYPES, HOME_LIMIT } from '../data/projects';
-import { logos } from '../data/logos';
+import ProjectCard from "./ProjectCard.astro";
+import { projects, PROJECT_TYPES, HOME_LIMIT } from "../data/projects";
+import { logos } from "../data/logos";
 
 const shown = projects.slice(0, HOME_LIMIT);
 ---
+
 <section class="py-12 md:py-20 lg:py-24" id="proyectos">
   <div class="wrap">
     <div class="reveal mb-8">
@@ -13,27 +14,44 @@ const shown = projects.slice(0, HOME_LIMIT);
 
     <div class="grid grid-cols-2 gap-5 lg:grid-cols-4">
       <article
-        class="reveal flex aspect-[4/5] flex-col justify-between rounded-card bg-lime-300 p-5 sm:p-6"
+        class="reveal flex aspect-4/5 flex-col justify-between rounded-card bg-lime-300 p-5 sm:p-6"
         data-d="1"
       >
-        <h3 class="text-xl font-medium leading-tight tracking-tight sm:text-2xl">
+        <h3
+          class="text-xl font-medium leading-tight tracking-tight sm:text-2xl"
+        >
           Proyectos seleccionados
         </h3>
         <div class="flex flex-col items-start gap-2">
-          {PROJECT_TYPES.map((t) => (
-            <a class="chip" href={`/proyectos?tipo=${t.id}`}>{t.label}</a>
-          ))}
+          {
+            PROJECT_TYPES.map((t) => (
+              <a class="chip" href={`/proyectos?tipo=${t.id}`}>
+                {t.label}
+              </a>
+            ))
+          }
         </div>
       </article>
 
-      {shown.map((p, i) => (
-        <ProjectCard project={p} logo={logos[p.slug]} delay={(i % 4) + 2} />
-      ))}
+      {
+        shown.map((p, i) => (
+          <ProjectCard project={p} logo={logos[p.slug]} delay={(i % 4) + 2} />
+        ))
+      }
 
-      <a class="card-more reveal" href="/proyectos" aria-label="Ver más proyectos">
+      <a
+        class="card-more reveal"
+        href="/proyectos"
+        aria-label="Ver más proyectos"
+      >
         <span class="more-title">Ver más proyectos</span>
         <span class="go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+          >
             <path d="M7 17 17 7M9 7h8v8"></path>
           </svg>
         </span>

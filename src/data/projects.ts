@@ -32,16 +32,19 @@ export const HOME_LIMIT = 6;
 const SUB = 'Migración • Estructura • Rediseño';
 
 export const projects: Project[] = [
-  { slug: 'le-cotonnier',     title: 'Le Cotonnier',     subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-le-cotonnier.png' },
-  { slug: 'carpintero',       title: 'Carpintero',       subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-carpintero.png' },
-  { slug: 'oz-cranberry-lab', title: 'Oz Cranberry Lab', subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-oz-cranberry-lab.png' },
-  { slug: 'banco-de-ropa',    title: 'Banco de Ropa',    subtitle: SUB, type: 'webflow',   href: '#', image: '/projects/bg-banco-de-ropa.png' },
-  { slug: 'boilera',          title: 'Boilera',          subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-boilera.png' },
-  { slug: 'urco',             title: 'Urco',             subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-urco.png' },
-  { slug: 'lucrecia-franzoy', title: 'Lucrecia Franzoy', subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-lucrecia-franzoy.png' },
-  { slug: 'caramba',          title: 'Caramba',          subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-caramba.png' },
-  { slug: 'tienda-copec',     title: 'Tienda Copec',     subtitle: SUB, type: 'shopify',   href: '#', image: '/projects/bg-tienda-copec.png' },
-  { slug: 'bodegas-don-tito', title: 'Bodegas Don Tito', subtitle: SUB, type: 'webflow',   href: '#', image: '/projects/bg-bodegas-don-tito.png' },
-  { slug: 'fundacion-aclara', title: 'Fundación Aclara', subtitle: SUB, type: 'codigo-ia', href: '#', image: '/projects/bg-fundacion-aclara.png' },
-  { slug: 'facetica',         title: 'Facetica',         subtitle: SUB, type: 'codigo-ia', href: '#', image: '/projects/bg-facetica.png' },
+  { slug: 'le-cotonnier',     title: 'Le Cotonnier',     subtitle: 'Migración • Estructura • Rediseño', type: 'shopify',   href: 'https://lecotonnier.cl/', image: '/projects/bg-le-cotonnier.png' },
+  { slug: 'carpintero',       title: 'Carpintero',       subtitle: 'Implementación diseño personalizado', type: 'shopify',   href: 'https://www.grupocarpintero.com/', image: '/projects/bg-carpintero.png' },
+  { slug: 'oz-cranberry-lab', title: 'Oz Cranberry Lab', subtitle: 'Rediseño • Estructura • Orden', type: 'shopify',   href: 'https://ozcranberry.com/', image: '/projects/bg-oz-cranberry-lab.png' },
+  { slug: 'banco-de-ropa',    title: 'Banco de Ropa',    subtitle: 'Diseño • Estructura • Contenido', type: 'webflow',   href: 'https://www.bancoderopa.cl/', image: '/projects/bg-banco-de-ropa.png' },
+  { slug: 'boilera',          title: 'Boilera',          subtitle: 'Diseño • Personalización producto', type: 'shopify',   href: 'https://boilera.cl/', image: '/projects/bg-boilera.png' },
+  { slug: 'urco',             title: 'Urco',             subtitle: 'Diseño • Estructura', type: 'shopify',   href: 'https://www.urco.cl/', image: '/projects/bg-urco.png' },
+  { slug: 'lucrecia-franzoy', title: 'Lucrecia Franzoy', subtitle: 'Diseño • Estructura', type: 'shopify',   href: 'https://lucreciafranzoy.cl/', image: '/projects/bg-lucrecia-franzoy.png' },
+  { slug: 'caramba',          title: 'Caramba',          subtitle: 'Migración • Diseño • Estructura', type: 'shopify',   href: 'https://caramba.cl/', image: '/projects/bg-caramba.png' },
+  { slug: 'bodegas-don-tito', title: 'Bodegas Don Tito', subtitle: 'Diseño • Estructura • Contenido', type: 'webflow',   href: 'https://bodegasdontito.cl/', image: '/projects/bg-bodegas-don-tito.png' },
+  { slug: 'tienda-copec',     title: 'Tienda Copec',     subtitle: 'Implementación lanzamiento', type: 'shopify',   href: 'https://www.tiendacopec.cl/', image: '/projects/bg-tienda-copec.png' },
+  { slug: 'zeiva',     title: 'Zeiva',     subtitle: 'Diseño • Estructura', type: 'shopify',   href: 'https://zeiva.cl/', image: '/projects/bg-zeiva.png' },
+  { slug: 'fundacion-aclara', title: 'Fundación Aclara', subtitle: 'Diseño • Estructura • Contenido • Desarrollo • En proceso', type: 'codigo-ia', href: 'https://fundacionaclara.cl/', image: '/projects/bg-fundacion-aclara.png' },
+  { slug: 'facetica',         title: 'Facetica',         subtitle: 'Desarrollo', type: 'codigo-ia', href: 'https://facetica.com/', image: '/projects/bg-facetica.png' },
+
+
 ];
