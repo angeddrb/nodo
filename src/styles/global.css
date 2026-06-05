@@ -742,7 +742,7 @@ a.chip:hover {
 /* compactar cards en pantallas chicas (2 columnas) */
 @media (max-width: 480px) {
   .watermark svg {
-    width: 65%;
+    width: 80%;
     max-width: 100px;
   }
 

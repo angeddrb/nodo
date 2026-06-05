@@ -23,7 +23,7 @@ import { logos } from "../data/logos";
       </h1>
 
       <div
-        class="mt-6 mb-8 flex flex-wrap gap-1 lg:gap-2.5"
+        class="mt-6 mb-8 flex flex-wrap gap-2.5"
         role="group"
         aria-label="Filtrar por tipo"
       >
@@ -37,7 +37,10 @@ import { logos } from "../data/logos";
         }
       </div>
 
-      <div class="grid grid-cols-2 gap-5 lg:grid-cols-4" id="all-projects">
+      <div
+        class="grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-4"
+        id="all-projects"
+      >
         {
           projects.map((p, i) => (
             <ProjectCard
