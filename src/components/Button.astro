@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string;
+  label?: string;
+  external?: boolean; // abre en pestaña nueva (default true)
+  class?: string;     // clases extra opcionales (ej. "nav-toggle")
+}
+
+const {
+  href,
+  label = 'Escríbeme por Whatsapp',
+  external = true,
+  class: extra = '',
+} = Astro.props;
+---
+<a
+  class:list={['btn', extra]}
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  {label} <span class="arr">→</span>
+</a>

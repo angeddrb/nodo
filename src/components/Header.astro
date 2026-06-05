@@ -1,5 +1,6 @@
 ---
 import NodoLogo from './NodoLogo.astro';
+import Button from './Button.astro';
 import { WHATSAPP } from '../data/site';
 ---
 <header class="site" id="top">
@@ -16,13 +17,9 @@ import { WHATSAPP } from '../data/site';
       <a class="navlink" href="/#que-hago">Que hago</a>
       <a class="navlink" href="/#proyectos">Proyectos</a>
       <a class="navlink" href="/#como-trabajo">Como trabajo</a>
-      <a class="btn" href={WHATSAPP} target="_blank" rel="noopener">
-        Escríbeme por Whatsapp <span class="arr">→</span>
-      </a>
+      <Button href={WHATSAPP} />
     </nav>
 
-    <a class="btn nav-toggle" href={WHATSAPP} target="_blank" rel="noopener">
-      Whatsapp <span class="arr">→</span>
-    </a>
+    <Button href={WHATSAPP} label="Whatsapp" class="nav-toggle" />
   </div>
 </header>
