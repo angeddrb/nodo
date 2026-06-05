@@ -1,11 +1,12 @@
 ---
-import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { projects, PROJECT_TYPES } from '../data/projects';
-import { logos } from '../data/logos';
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects, PROJECT_TYPES } from "../data/projects";
+import { logos } from "../data/logos";
 ---
+
 <Base
   title="Proyectos · Nodo by Ange Díaz del Río"
   description="Todos los proyectos de Nodo: Shopify, Webflow y desarrollo con código + IA."
@@ -15,21 +16,38 @@ import { logos } from '../data/logos';
   <main class="pt-28 pb-16 md:pt-32 md:pb-24 lg:pt-36">
     <div class="wrap">
       <span class="eyebrow">Proyectos</span>
-      <h1 class="mt-4 text-4xl font-normal leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+      <h1
+        class="mt-4 text-4xl font-normal leading-[1.05] tracking-tight md:text-5xl lg:text-6xl"
+      >
         Todos los proyectos
       </h1>
 
-      <div class="mt-6 mb-8 flex flex-wrap gap-2.5" role="group" aria-label="Filtrar por tipo">
+      <div
+        class="mt-6 mb-8 flex flex-wrap gap-1 lg:gap-2.5"
+        role="group"
+        aria-label="Filtrar por tipo"
+      >
         <button class="filter-btn is-active" data-filter="todos">Todos</button>
-        {PROJECT_TYPES.map((t) => (
-          <button class="filter-btn" data-filter={t.id}>{t.label}</button>
-        ))}
+        {
+          PROJECT_TYPES.map((t) => (
+            <button class="filter-btn" data-filter={t.id}>
+              {t.label}
+            </button>
+          ))
+        }
       </div>
 
       <div class="grid grid-cols-2 gap-5 lg:grid-cols-4" id="all-projects">
-        {projects.map((p, i) => (
-          <ProjectCard project={p} logo={logos[p.slug]} delay={(i % 4) + 1} reveal={false} />
-        ))}
+        {
+          projects.map((p, i) => (
+            <ProjectCard
+              project={p}
+              logo={logos[p.slug]}
+              delay={(i % 4) + 1}
+              reveal={false}
+            />
+          ))
+        }
       </div>
     </div>
   </main>
@@ -37,26 +55,36 @@ import { logos } from '../data/logos';
   <Footer />
 
   <script>
-    const VALID = ['shopify', 'webflow', 'codigo-ia'];
-    const grid = document.getElementById('all-projects');
+    const VALID = ["shopify", "webflow", "codigo-ia"];
+    const grid = document.getElementById("all-projects");
     if (grid) {
-      const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-type]'));
-      const btns = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+      const cards = Array.from(
+        grid.querySelectorAll<HTMLElement>("[data-type]"),
+      );
+      const btns = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(".filter-btn"),
+      );
 
       const apply = (key: string) => {
-        btns.forEach((b) => b.classList.toggle('is-active', b.dataset.filter === key));
+        btns.forEach((b) =>
+          b.classList.toggle("is-active", b.dataset.filter === key),
+        );
         cards.forEach((c) => {
-          c.style.display = key === 'todos' || c.dataset.type === key ? '' : 'none';
+          c.style.display =
+            key === "todos" || c.dataset.type === key ? "" : "none";
         });
         const url = new URL(location.href);
-        if (key === 'todos') url.searchParams.delete('tipo');
-        else url.searchParams.set('tipo', key);
-        history.replaceState(null, '', url);
+        if (key === "todos") url.searchParams.delete("tipo");
+        else url.searchParams.set("tipo", key);
+        history.replaceState(null, "", url);
       };
 
-      const initial = new URLSearchParams(location.search).get('tipo') || 'todos';
-      apply(VALID.includes(initial) ? initial : 'todos');
-      btns.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter || 'todos')));
+      const initial =
+        new URLSearchParams(location.search).get("tipo") || "todos";
+      apply(VALID.includes(initial) ? initial : "todos");
+      btns.forEach((b) =>
+        b.addEventListener("click", () => apply(b.dataset.filter || "todos")),
+      );
     }
   </script>
 </Base>
