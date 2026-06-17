@@ -19,7 +19,7 @@ export interface Project {
 export const PROJECT_TYPES = [
   { id: "shopify", label: "Shopify" },
   { id: "webflow", label: "Webflow" },
-  { id: "codigo-ia", label: "Código + IA" },
+  { id: "codigo-ia", label: "Desarrollo" },
 ] as const;
 
 export const typeLabel = (t: ProjectType) =>
@@ -127,13 +127,5 @@ export const projects: Project[] = [
     type: "codigo-ia",
     href: "https://fundacionaclara.cl/",
     image: "/projects/bg-fundacion-aclara.png",
-  },
-  {
-    slug: "facetica",
-    title: "Facetica",
-    subtitle: "Ajustes visuales",
-    type: "codigo-ia",
-    href: "https://facetica.com/",
-    image: "/projects/bg-facetica.png",
   },
 ];
