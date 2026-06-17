@@ -123,7 +123,7 @@ export const projects: Project[] = [
   {
     slug: "fundacion-aclara",
     title: "Fundación Aclara",
-    subtitle: " En proceso • Diseño • Estructura • Contenido • Desarrollo",
+    subtitle: "En proceso • Diseño • Estructura • Contenido • Desarrollo",
     type: "codigo-ia",
     href: "https://fundacionaclara.cl/",
     image: "/projects/bg-fundacion-aclara.png",
