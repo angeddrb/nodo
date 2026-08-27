@@ -1,9 +1,9 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
-import { projects, PROJECT_TYPES, HOME_LIMIT } from "../data/projects";
+import { homeProjects, PROJECT_TYPES } from "../data/projects";
 import { logos } from "../data/logos";
 
-const shown = projects.slice(0, HOME_LIMIT);
+const shown = homeProjects;
 ---
 
 <section class="py-12 md:py-20 lg:py-24" id="proyectos">

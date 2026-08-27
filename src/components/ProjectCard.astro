@@ -27,6 +27,7 @@ const badge = project.badge ?? typeLabel(project.type);
   <div class="meta">
     <div class="ttl">{project.title}</div>
     <div class="sub">{project.subtitle}</div>
+    {project.year && <div class="year-inline">{project.year}</div>}
   </div>
   <span class="go" aria-hidden="true">
     <svg
