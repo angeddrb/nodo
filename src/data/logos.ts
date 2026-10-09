@@ -20,6 +20,7 @@ import tiendaCopec from "../assets/logos/tienda-copec.svg?raw";
 import zeiva from "../assets/logos/zeiva.svg?raw";
 import portis from "../assets/logos/portis.svg?raw";
 import bettership from "../assets/logos/bettership.svg?raw";
+import fuandes from "../assets/logos/fuandes.svg?raw";
 
 export const logos: Record<string, string> = {
   "le-cotonnier": leCotonnier,
@@ -37,4 +38,5 @@ export const logos: Record<string, string> = {
   zeiva: zeiva,
   portis: portis,
   bettership: bettership,
+  fuandes: fuandes,
 };

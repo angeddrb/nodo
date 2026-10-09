@@ -30,17 +30,26 @@ export const typeLabel = (t: ProjectType) =>
 // El orden de esta lista = el orden en que aparecen en la grilla.
 // Para filas parejas de 4: (1 intro + N + 1 ver-más) múltiplo de 4 → N = 6 ó 10.
 export const HOME_SLUGS: string[] = [
+  "fuandes",
   "portis",
   "le-cotonnier",
   "oz-cranberry-lab",
   "fundacion-aclara",
-  "carpintero",
   "urco",
 ];
 
 const SUB = "Migración • Estructura • Rediseño";
 
 export const projects: Project[] = [
+  {
+    slug: "fuandes",
+    title: "Fundación Uandes",
+    subtitle: "Diseño • Contenido • Desarrollo",
+    type: "webflow",
+    href: "https://fuandes.cl/",
+    image: "/projects/bg-fuandes.png",
+    year: 2026,
+  },
   {
     slug: "portis",
     title: "Portis",
